@@ -1,0 +1,7 @@
+Kirill suggests that you can take this course in many ways. 
+The Classic Datascience method would be
+- Data Prep (section 3)
+- Visualization
+- Modeling
+- Communications and Presentation
+In this way you follow the 'normal' path through a project in data science. The course in it's out of the box sequence has a slightly different approach, not bad just different. He also notes you can take the course in any number of ways. 

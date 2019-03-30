@@ -1,0 +1,10 @@
+Project 2 of Section 3 data prep
+Basically Kirill is walking us through various problems we'll have with data.
+
+So far these range from;
+- date formatting - we fix in Excel
+- adjustment errors in Excel - manually edited some data, deleted others
+- extra long text - adjust in ETL process by expanding field size
+- can adjust for data truncation in SSIS we changed all field lengths to 1000 and feedback to 5000
+- we learned to do two conditional splits in our SSIS package to cleanse some things before loading only the good data
+-- spit out two collections of unuseable data - 1. missing data we need and 2. additional problems in data not previously created.

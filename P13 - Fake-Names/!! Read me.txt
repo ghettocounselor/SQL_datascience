@@ -1,1 +1,0 @@
-This is a basic folder structure for keeping your work organized in a development process. 

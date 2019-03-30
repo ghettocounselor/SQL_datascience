@@ -1,0 +1,19 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ETLerrorHandlingPhase2_verII", "ETLerrorHandlingPhase2_verII\ETLerrorHandlingPhase2_verII.dtproj", "{9DB762F3-8E45-4402-9C16-41A4E094C04D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DB762F3-8E45-4402-9C16-41A4E094C04D}.Development|Default.ActiveCfg = Development
+		{9DB762F3-8E45-4402-9C16-41A4E094C04D}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

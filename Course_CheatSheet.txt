@@ -1,0 +1,9 @@
+
+Lecture 118 is build of SSIS package
+
+from lecture 121 - basic table naming structure and the Row Number column
+CREATE TABLE [RAW_FakeNames_03302019_0700] (
+[RowNumber] int identity(1,1),
+
+Lecture 133 & 134
+really good class on automatically cleaning data on upload and seperating good and bad records. 
