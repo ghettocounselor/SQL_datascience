@@ -1,0 +1,41 @@
+Section 3 Data Prep Lecturre 139
+
+HOMEWORK request;
+three factors needed - last three columns Blood Type, Kilograms and Centimetttters
+It's not really clear what the homework assignment is here ??
+
+Step 1 - download data provided, place into new folder structure created for homework and make a few copies in Prepared data folder.
+-- Kirill likes to make a .txt file for xls use (I'm not sure why, maybe just a habit)
+-- NotePad++ version to look at in NotePad ++
+-- XLS version to look at in XLS (on Mac) - change all columns to Text type
+-- copy of orginal data, presumably we'll be editing.
+-- roughly 100,000 rows
+
+Step 2 - data review
+-- XLS 
+--- 72 rows don't have blood type
+--- 130 rows don't have kg
+--- 243 rows don't have centimeters
+--- any number of other rows with the three items above have eroneous information
+--- row 70 screwed
+
+Step 3 -- fix a few things in xlsss
+- column K birthday change to yyyy-mm-dd format
+
+Step 4 - SSIS package
+-- had to go back to notepad ++ and fix name columns to last and first name
+-- normal steps
+--- flat file source for initial pull
+--- conditional split on missing BT, KG, CM
+--- second conditional split on shifted items into column 18
+--- setup of folders and flat files to capture these
+--- OLE DB connection setup for table build
+	set AlwaysUseDefaultCodePage to True
+--- REVIEW PACKAGE EXECUTION ERRORS
+-- NOTE WHERE - under the display where you see the components of the SSIS package you can click on the items to edit the parameters. Double clicking on them does not work.
+-- note issue with address
+-- before fix truncateeed (clear) table
+-- added to the bad data conditional split a check of address > 200 characters - clearly something wrong there
+-- adjusted initial import of data to include 5000 characters in Address (or allow that many depending on how you think about it)
+
+-- lastly after it loads properly go to control flow in SSIS and disable
