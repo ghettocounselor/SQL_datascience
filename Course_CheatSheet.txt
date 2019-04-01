@@ -7,3 +7,25 @@ CREATE TABLE [RAW_FakeNames_03302019_0700] (
 
 Lecture 133 & 134
 really good class on automatically cleaning data on upload and seperating good and bad records. 
+
+Lecture 139 HOMEWORK
+Good run through of SSIS package with conditional splits
+
+Lecture 143 SQL for datascience
+Here Kirill is running through basics of SQL server management studio.
+How to import data quickly (non-SSIS). 
+- from flat file -> destination (Microsoft OLE DB Provider for SQL Server)
+(note: different than what you do at work where you use the client) 
+
+Lecture 150 Implicit data conversion
+Mostly covering varchar (text) conversions (implicit) to other types. 
+See PDF P12-SQL-Server-Data-Type-Conversion-Chart.pdf
+
+Lecture 151 Explicit data conversion
+cast - example cast text as a number with decimals (float)
+and 
+convert - pretty much the same but better for dates
+
+
+
+
