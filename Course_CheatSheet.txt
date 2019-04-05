@@ -7,6 +7,9 @@ CREATE TABLE [RAW_FakeNames_03302019_0700] (
 
 Lecture 133 & 134
 really good class on automatically cleaning data on upload and seperating good and bad records. 
+Q&A - right click to add annotations to a build package in SSIS
+Open designer on an SSIS solution; from solution explorer click on .dtsx file then use view
+from toolbar and choose designer. 
 
 Lecture 139 HOMEWORK
 Good run through of SSIS package with conditional splits
@@ -26,6 +29,15 @@ cast - example cast text as a number with decimals (float)
 and 
 convert - pretty much the same but better for dates
 
+Lecture 157 - TETLT - Transform, Extract, Transform, Load, Transform
+the next step here is moving data from TXT format from upload into proper formats; int, date, etc...
+we'll use stored procedures to take data from RAW DB to what we'll call a working DB
+and the final step is possible with making some sort of view or combination of tables 
+that can then be used with R, Python, Tableau
 
+Lecture 160 - Stored Procedures
+in Programmability folder you can create a Stored Procedure
+See saved SQL in Customer Listing folder
+Stored procedure is stored in DB
 
 

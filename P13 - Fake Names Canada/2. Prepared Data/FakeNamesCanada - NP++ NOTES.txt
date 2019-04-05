@@ -1,0 +1,39 @@
+file is tab delimited
+200,000
+xls can open files up to 1 mil + rows so we are good. 
+
+
+Notes from inspection;
+
+- 1000 characters per row will be fine
+
+we have interest rate with % signs
+
+we have balance in $ with $ and ,'s
+
+we have birthday with MM/DD/YY
+note 
+zipcode in canada is odd ;)
+
+noted a few odd characters like ? in street address
+
+look for stuff where columns are blank
+
+-- look ok didn't do thorough job of this
+
+fixes in XLS
+
+-- my xls on MAC imports date correctly as MDY not 
+text
+but we need to custom format to YYYY-MM-DD in xls
+
+-- balance reformat to number no $ with 2 decimal points again
+
+MAC xls imports as general type, in course Kirill uses text to columns
+
+to change the type to General before formatting. 
+
+-- interest rate we formatted as a number with 4 decimals which converted to 
+
+a decimal version of the original stated % (100 * whatever version)
+
