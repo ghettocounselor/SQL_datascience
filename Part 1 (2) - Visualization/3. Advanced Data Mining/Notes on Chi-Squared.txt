@@ -1,0 +1,18 @@
+Lecture at https://www.udemy.com/datascience/learn/lecture/3527138
+Basically we're looking for is something simply random or is there a distinct difference in
+the items being tested. 
+
+BIG NOTE: in our test of we're checking the variable against exited or not exited we are
+not testing, for instance, male vs female. The online test references 'sample 1' or '2' as 'more'
+successful. 
+
+Rules to remember; Lecture 36 https://www.udemy.com/datascience/learn/lecture/3527140
+1. Probability of independence - this is what this Chi-Squared test is all about
+2. NOT the relationship between variables - example; we are not telling the significance
+of the difference between variables (gender and exiting) only independence (not just random)
+3. Cannot use %'s we need absolute values
+4. Categories need to be exclusive ex; you either exited or you didn't, you cannot have
+items in the test in both of your groups. 
+5. Never exclude any (even 1) of the outcomes; although you can excluse entire categories, ex; we 
+could in our data test France vs Germany and leave out Spain. This was not well described. 
+6. Minimum of 5 observations in each cell

@@ -1,0 +1,43 @@
+Data Prep Section Homework.
+Lecture 184
+https://www.udemy.com/datascience/learn/lecture/3588586?start=0#questions
+
+The Challenge, as explained in homework word doc.
+Vehicle Service Challenge
+
+1. The CustomerID field does not contain duplicate records.
+2. There are 5 errors in the data. Find them.
+3. Suggest explanations how each of the errors could have occurred and 
+what you think is the best way to fix each one.
+4. You know that the total projected revenue 
+for 2016 equals: $419,896,187.87. You need the uploaded data to 
+match this value (this means that every row is important).
+
+Notes;
+- imported .txt file into MAC XLS
+-- or tried too but file to big for one sheet. 
+-- xls can only hold 1,048,576 rows we have a little over 1,050,000 rows :) 
+-- looking through NP ++ and the Mil + rows that did import the data looks generally OK
+-- file is semicolon separated
+- Decided to just pull into DB via SSIS package
+-- it errored
+- Back to file
+-- broke into two pieces
+-- pull back into XLS and adjust data and $$ rows as normal Text to Columns then format
+-- save each as csv
+-- put back together
+-- make SSIS package
+--- note one file has an extra column
+--- 5 ISSUES discovered
+1 --- one row 2738818 in data had a ; instead of a decimal place which gave us an extra column - was excluded in SSIS package
+2 --- one row 676802 in data had a $ instead of a decimal place so we pulled this in SQL 
+3 --- one customer number was duplicaed (with two dif cars) 
+ CustomerID	CustomerSince	Vehicle	2014	2015	2016E
+ 3490750	2006-05-17	2007 Tata Sumo	349.88	340.62	517.2
+ 3490750	2006-01-22	2004 Volkswagen Touran	735.77	741.23	314.09
+4 --- one customer is a customer since 1899 :D 2942833 SINCE 1899-04-30
+5 --- one customer had a 2014 of 20000 as in 20,000 :)  
+
+FINAL NOTES
+Proc file is well noted. 
+Good examples of some tricks 

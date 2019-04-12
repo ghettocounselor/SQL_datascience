@@ -1,0 +1,11 @@
+Lecture 37 Section Recap
+https://www.udemy.com/datascience/learn/lecture/3527134
+
+1. How to create and use bins - convert numerical variables into categories (buckets or groups basically)
+2. How to visualize distributions - use bins to see various distributions 
+3. How to create an A-B test for numeric variables
+4. How to combine two charts in Tableau and the extra bits created in this technique
+5. What the Chi-Squared test is and how to use it to do some confirmation of independence; XLS, web tool
+6. Chi-Squared for more than two categories (like our 3 countries) as well as Kirill's hack to simply check two out of three. 
+7. Bonus tutorials on Chi-Squared
+

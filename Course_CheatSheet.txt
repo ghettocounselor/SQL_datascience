@@ -40,4 +40,15 @@ in Programmability folder you can create a Stored Procedure
 See saved SQL in Customer Listing folder
 Stored procedure is stored in DB
 
+Lecture 170's
+more work with stored procedures. 
+
+Lecture 207-210 is Dataprep Section Homework, really good stuff.
+
+Lecture 10 start of Tableau - I decided to use the 'Public' option as opposed to the 'Trial' version, Kirill said it was the same.
+A 32-bit version of Tableau Reader 10.4 is available for users who need to view older versions of Tableau workbook files on 32-bit operating systems. 
+Please use the following download link: http://downloads.tableau.com/tssoftware/TableauReader-32bit-10-4-6.exe
+Desktop version 32 bit here: https://www.tableau.com/support/releases/desktop/10.4.11
+
+
 
