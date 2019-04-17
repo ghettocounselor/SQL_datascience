@@ -1,0 +1,218 @@
+R&D Spend,Administration,Marketing Spend,State,Profit
+
+profit is our dependent variable
+other items are independent variables 
+
+Lecture 55 is about Dummy variables. https://www.udemy.com/datascience/learn/lecture/3495512?start=0
+In this case State is a Categorical variable and therefore we need a dummy variable. 
+To do this we add a column for  each state and place a 1 in each row wherre the state is positive.
+Those new columns are called dummy variables. 
+
+Lecture 56 Dummy variable trap
+Rule: always exclude 1 dummy variable. 
+why? "It is still pretty hard to see why the model does not give valid results if all dummy variables 
+are included. Because whenever we have a solution for the case where D2 is excluded, then we can derive 
+an equivalent solution where D2 is included. For instance, let's say we found the coefficients b0, b1, b2, b3,  
+and b4 for the model where D2 is excluded. Then by choosing an arbitrary number b5 and set b4' = b4 + b5 and 
+b0' = b0-b5 we found a new set of coefficients b0', b1, b2, b3,b4',b5 with y = b0' + b1*x1 +b2*x2 + b3*x3 + b4'*d1 + b5*d2. 
+It is easy to see that the new function is equivalent to the one without d2. One the other hand, whenever we 
+have a solution for the case where d2 is also included, we can derive a solution for the case where d2 is excluded. 
+So the solution space in both cases are equivalent.
+
+I think a better intuition why the algorithm does not work when collinearity is present lies in the heart 
+of the gradient decent strategy when minimizing the loss function. In particular, when the algorithm computes 
+the gradient with respect to a particular variable, all the remaining variables are considered constants and 
+have gradients 0. This is only true if these variables are independent of the variable based on which the 
+gradient is computed. Hence, if all dummy variables are included, the algorithm is just broken."
+
+Lecture 57 Building a Model (step by step https://www.udemy.com/datascience/learn/lecture/3495938
+reasons to not put everything in your model; garbage in garbage out, not everything is necessary for a model to work well. 
+number two, we really only want to use those items that are meaningful. 
+
+5 methods we'll cover
+1. All-in
+2. Backward Elimination (stepwise regression)
+3. Forward Selection (stepwise regression)
+4. Bedirectional Elimination (stepwise regression)
+5. Score Comparison
+
+All-in
+If you have content or prior knowledge that all things given to you are in fact important. Or if you are preparing for a backwarrrrrd elll
+
+Backwards elimination
+1. Select a level of significance to STAY in the model (ex; SL = 0.05)
+2. Fit the model with all possible predictors
+3. Consider the predictor with the highest P-value. 
+if P > SL, go to step 4, otherwise go to FIN
+4. Remove the predictor with the highest P and go to next step
+5. Fit model without the removed variable
+6. Go back to step 3 and loop through
+Until you don’t fine P > SL and step 3 will fail and you’ll go to FIN
+
+Forward selection
+1. Select a level of significance to ENTER the model (ex; SL = 0.05)
+2. Fit all simple regression models Y ~ Xn Select the one with the lowest P-value
+3. Keep this variable and fit all possible models with one extra predictor added to the one(s) you already have
+4. Consider the predictor with the lowest P-value. If P < SL, go to step 3, otherwise go to FIN
+Looping through 3 -> 4 etc… and stop when variable P is not < SL. 
+at FIN we keep the previous model, aka the one before the last P value failed. 
+
+Bidirectional elimination (both from above)
+1. Select a significance level to enter AND stay in the model; SLENTER = 0.05, SLSTAY = 0.05
+2. Perform the next step of Forward Selection (new variables must have P < SLENTER to enter)
+3. Perform ALL steps of Backward Elimination (old variables must have P < SLSTAY to stay)
+4. No new variables can enter and no old variables can exit
+FIN your model is ready
+
+Score Comparison - All Possible Models
+1. Select a criterion of goodness of fit (e.g. Akaike criterion)
+2. Construct ALL possible regression Models; 2n-1 Total combinations
+3. Select the one with the best criterion 
+FIN your model is ready
+Note 10 columns of data would give you 1023 models :)       1. 
+
+Backwards elimination
+1. Select a level of significance to STAY in the model (ex; SL = 0.05)
+2. Fit the model with all possible predictors
+3. Consider the predictor with the highest P-value. 
+if P > SL, go to step 4, otherwise go to FIN
+4. Remove the predictor with the highest P and go to next step
+5. Fit model without the removed variable
+6. Go back to step 3 and loop through
+Until you don’t fine P > SL and step 3 will fail and you’ll go to FIN
+
+50-startup file open in Gretl
+1. Gretl identified that we have a variable STATE that is categorical so we need to deal with this. 
+— Add from menu - Dummies for discrete variables => top choice
+— change names
+2. we are selecting SL = 0.05
+3. Model => Ordinary Least Squares
+4. move Regressors (independent variables) into the Regressors box all but profit and 1 of our states (we choose to move NY)
+5. Vwalla; we want the P values. 
+Note the stars, they give some indication of the size. 
+Model 2: OLS, using observations 1-50
+Dependent variable: Profit
+
+                   coefficient    std. error   t-ratio   p-value 
+  ---------------------------------------------------------------
+  const           50416.5        6653.54        7.577   1.43e-09  ***
+  RDSpend             0.807956      0.0457466  17.66    7.33e-022 ***
+  Administration     −0.0236200     0.0518559  −0.4555  0.6509   
+  MarketingSpend      0.0263692     0.0166783   1.581   0.1209   
+  New_York        −1332.09       2690.18       −0.4952  0.6229   
+
+Mean dependent var   112012.6   S.D. dependent var   40306.18
+Sum squared resid    3.90e+09   S.E. of regression   9309.026
+R-squared            0.951013   Adjusted R-squared   0.946659
+F(4, 45)             218.4023   P-value(F)           7.53e-29
+Log-likelihood      −525.2499   Akaike criterion     1060.500
+Schwarz criterion    1070.060   Hannan-Quinn         1064.140
+
+Excluding the constant, p-value was highest for variable 2 (Administration)
+
+following the steps
+step 3 => Administration 0.65… is highest and is greater than SL
+step 4 => remove variable and refit model
+
+RESULT
+Model 3: OLS, using observations 1-50
+Dependent variable: Profit
+
+                   coefficient    std. error   t-ratio   p-value 
+  ---------------------------------------------------------------
+  const           47721.8        3018.34       15.81    3.22e-020 ***
+  RDSpend             0.800294      0.0421740  18.98    2.18e-023 ***
+  MarketingSpend      0.0285947     0.0158086   1.809   0.0770    *
+  New_York        −1484.61       2646.17       −0.5610  0.5775   
+
+Mean dependent var   112012.6   S.D. dependent var   40306.18
+Sum squared resid    3.92e+09   S.E. of regression   9228.486
+R-squared            0.950787   Adjusted R-squared   0.947578
+F(3, 46)             296.2378   P-value(F)           4.44e-30
+Log-likelihood      −525.3649   Akaike criterion     1058.730
+Schwarz criterion    1066.378   Hannan-Quinn         1061.642
+
+Excluding the constant, p-value was highest for variable 6 (New_York)
+
+following the steps
+From model results we can run a graph against the item we are removing to see if things look like they share a relationship. We look at the RED x’s the actual. 
+step 3 => NewYork 0.577 is highest and is greater than SL
+step 4 => remove variable and refit model
+
+RESULTS
+Model 4: OLS, using observations 1-50
+Dependent variable: Profit
+
+                   coefficient    std. error   t-ratio   p-value 
+  ---------------------------------------------------------------
+  const           46975.9        2689.93       17.46    3.50e-022 ***
+  RDSpend             0.796584      0.0413476  19.27    6.04e-024 ***
+  MarketingSpend      0.0299079     0.0155200   1.927   0.0600    *
+
+Mean dependent var   112012.6   S.D. dependent var   40306.18
+Sum squared resid    3.94e+09   S.E. of regression   9160.966
+R-squared            0.950450   Adjusted R-squared   0.948342
+F(2, 47)             450.7713   P-value(F)           2.16e-31
+Log-likelihood      −525.5354   Akaike criterion     1057.071
+Schwarz criterion    1062.807   Hannan-Quinn         1059.255
+
+following the steps
+From model results we can run a graph against the item we are removing to see if things look like they share a relationship. We look at the RED x’s the actual. 
+step 3 => MarketSpend 0.06 is highest and is greater than SL (but it is close :) ) this shows the arbitrary nature of the step wise process. 
+In reality this does look like there is a correlation. 
+step 4 => remove variable and refit model
+
+RESULTS
+Model 5: OLS, using observations 1-50
+Dependent variable: Profit
+
+             coefficient     std. error    t-ratio    p-value 
+  ------------------------------------------------------------
+  const      49032.9        2537.90         19.32    2.78e-024 ***
+  RDSpend        0.854291      0.0293056    29.15    3.50e-032 ***
+
+Mean dependent var   112012.6   S.D. dependent var   40306.18
+Sum squared resid    4.26e+09   S.E. of regression   9416.349
+R-squared            0.946535   Adjusted R-squared   0.945421
+F(1, 48)             849.7889   P-value(F)           3.50e-32
+Log-likelihood      −527.4365   Akaike criterion     1058.873
+Schwarz criterion    1062.697   Hannan-Quinn         1060.329
+
+step 3 => no variable is greater than SL
+step 4 => remove variable and refit model
+
+HANDY TRICK to make our models more robust. 
+We’ll look at R-squared and Adjusted R-squared 
+Model 2 R-squared            0.951013   Adjusted R-squared   0.946659
+Model 3 R-squared            0.950787   Adjusted R-squared   0.947578
+Model 4 R-squared            0.950450   Adjusted R-squared   0.948342
+Model 5 R-squared            0.946535   Adjusted R-squared   0.945421
+Note that Adjusted R-squared is going up for first 3 steps
+Last step it went down, this is because the MarketingSpend in fact was useful. 
+Said another way model 4 was a better fit than model 5. 
+R-squared will always go down. 
+
+The lowest Akaike criterion     1057.071 is also an indicator, so Model Number 4 is best. 
+
+Interpreting Coefficients (dependent variable is Profit)
+B1 is RDSpend 
+B2 is Marketing Spend 
+
+1. is the item positive, if yes it says the item is correlated with your dependent variable, in crease the regressor then the dependent variable will increase
+2. if negative the opposite relationship exists
+3. look at the magnitude, as in the size of the coefficients; note in this case the ‘units’ of the variables is important to keep in mind when looking at magnitude
+magnitude is a directional item. If these are both in the same units, and they are, then RDSpend has a larger impact on profit. 
+4. interpretation; RDSpend coefficient of 0.79 means that 1 unit increase in RDSpend will be 0.79 unit in Profit; in this case $1 in RDSpend will drive $0.79 in Profit
+— negative coefficients are interpreted the exact opposite in that each dollar spend in an area will cause profit to go down; REMEMBER this is only true if the item is statistically significant (> than our P value)
+5. Dummy values interpreting; their relationship is slightly more direct (word?) in that it’s not on a per unit basis it’s just literally. See in the Models before we removed New York it’s negative and like 1200
+this means that if the company is in NY that profit will be 1200 less than that same company in California. Again, it’s not on a per unit basis it’s just the number. 
+
+
+
+
+
+
+
+
+
+{\rtf1}

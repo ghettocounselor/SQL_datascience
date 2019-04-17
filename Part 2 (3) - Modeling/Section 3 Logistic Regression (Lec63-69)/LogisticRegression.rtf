@@ -1,0 +1,154 @@
+Section 3 of Modeling working on email offer
+Lecture start https://www.udemy.com/datascience/learn/lecture/3532170
+Data https://sds-platform-private.s3-us-east-2.amazonaws.com/uploads/P12-Email-Offer.csv
+Zip file https://sds-platform-private.s3-us-east-2.amazonaws.com/uploads/P12-Logistic-Regression-Coefficients.zip
+
+Here we are looking at binary outcome. 
+We're looking at which segments of a population Age or Gender are more likely to take action. 
+
+Data
+Age,Gender,TookAction
+basically it's tracking information about whether they took action on an offer. 
+TookAction is the dependent variable is binary y/n 1/0
+
+Again Gretl notes we have a categorical variable.
+	P12-Email-Offer.csv
+
+	One or more non-numeric variables were found.
+	These variables have been given numeric codes as follows.
+
+	String code table for variable 2 (Gender):
+	  1 = 'Female'
+	  2 = 'Male'
+
+Step 1 - lets graph TookAction (Y axis) vs Age (X)
+View => Graph specific vars => Scatter
+we do see a little bit of info in that older folks are more likely to take action. 
+but we can see that there's nnnno real linear regression (note Gretl tried to fit a line)
+
+Step 2 - https://www.udemy.com/datascience/learn/lecture/3495924
+The trick with this data is in our dependent variable is binary and 
+this makes the graph not a normal scatter :) 
+Lecture 65 we talked about the theory of logistic regression; it makes alot of sense
+
+Lecture 66 build a model
+model => Limited Dependent Variable => Logit => Binary
+TookAction dependent and default
+Age as only regressor
+check Show P-values
+
+Model 2: Logit, using observations 1-100
+Dependent variable: TookAction
+Standard errors based on Hessian
+
+             coefficient   std. error     z      p-value 
+  -------------------------------------------------------
+  const      −22.5768       4.79476     −4.709   2.49e-06 ***
+  Age          0.557366     0.118128     4.718   2.38e-06 ***
+
+Mean dependent var   0.400000   S.D. dependent var   0.492366
+McFadden R-squared   0.652483   Adjusted R-squared   0.622766
+Log-likelihood      −23.38827   Akaike criterion     50.77655
+Schwarz criterion    55.98689   Hannan-Quinn         52.88526
+
+Number of cases 'correctly predicted' = 90 (90.0%)
+f(beta'x) at mean of independent vars = 0.159
+Likelihood ratio test: Chi-square(1) = 87.8258 [0.0000]
+
+           Predicted
+             0    1
+  Actual 0  55    5
+         1   5   35
+
+From results window Graph => Fitted Actual => Against Age
+Provides a graph that is like the one in Kirill's discussion of the technique
+
+Next run Analysis => Forecasts (don't change settings)
+Next we want to save the Forecast as a new variable using + sign
+This created the Y^ (Y Hat) variable as TookAction_hat
+               Age         Gender     TookAction TookAction_hat
+
+  1             38         Female              0      0.0116887
+The model predicted 1% likelihood of taking action :D
+Interestingly here's an example of where the model failed
+no action but likelihood was 85%
+  5             40           Male              0        0.85501
+
+Lecture 67 False Positives and Negatives
+https://www.udemy.com/datascience/learn/lecture/3495930
+We want to try some things to assess the model. 
+In the lecture Kirill goes over 4 actual values and their predictions. 
+Where the actual was Negative but the prediction was Positive, this is a 
+type 1 error and was a false positive.  
+Where the actual was Positive but the prediction was Negative, this is a 
+type 2 error and was a false negative. 
+
+Lecture 68 The Confusion Matrix
+https://www.udemy.com/datascience/learn/lecture/3495932
+
+	Model 4: Logit, using observations 1-100
+	Dependent variable: TookAction
+	Standard errors based on Hessian
+
+				 coefficient   std. error     z      p-value
+	  ------------------------------------------------------
+	  const      −33.7146       8.83304     −3.817   0.0001  ***
+	  Age          0.887226     0.231787     3.828   0.0001  ***
+	  Female      −4.43738      1.49193     −2.974   0.0029  ***
+
+Interpretation: 
+Lecture 69 https://www.udemy.com/datascience/learn/lecture/3495934
+1. - Since Age is positive it adds to the effect, in this case took action
+and Female is negative which means it detracts from the effect. 
+2. - Note; you cannot, in this form of regression (logistic) use the coefficient 
+to quantify any of the effect. 
+3. - Note; you can, without quantifying, compare coefficients and you can see which 
+is more impactful. Note the scale of which is represented by the coefficient is
+or can be tricky. 
+4. Z (zed score) - the units of z are in the units of the std. error which is the same for all 
+variables so the Z score does provide some way to compare the impact of the variables. It's 
+still not quite the same. 
+https://www.statisticshowto.datasciencecentral.com/probability-and-statistics/z-score/
+Simply put, a z-score is the number of standard deviations from the mean a data point is. 
+But more technically it's a measure of how many standard deviations below or above the 
+population mean a raw score is. A z-score is also known as a standard score and it can 
+be placed on a normal distribution curve.
+Kahn class https://www.khanacademy.org/math/statistics-probability/modeling-distributions-of-data/z-scores/v/comparing-with-z-scores
+Kahn video on comparison https://www.khanacademy.org/math/statistics-probability/modeling-distributions-of-data/z-scores/v/comparing-with-z-scores
+
+
+	Mean dependent var   0.400000   S.D. dependent var   0.492366
+	McFadden R-squared   0.779993   Adjusted R-squared   0.735417
+	Log-likelihood      −14.80675   Akaike criterion     35.61349
+	Schwarz criterion    43.42901   Hannan-Quinn         38.77657
+
+	Number of cases 'correctly predicted' = 94 (94.0%)
+	f(beta'x) at mean of independent vars = 0.088
+	Likelihood ratio test: Chi-square(2) = 104.989 [0.0000]
+
+THIS IS THE CONFUSION MATRIX !!!!
+			   Predicted
+				 0    1
+	  Actual 0  58    2
+			 1   4   36
+Accuracy = 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{\rtf1}

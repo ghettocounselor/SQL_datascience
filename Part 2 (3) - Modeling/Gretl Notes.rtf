@@ -1,0 +1,44 @@
+Lecture 47 - 51
+https://www.udemy.com/datascience/learn/lecture/3495484
+
+http://gretl.sourceforge.net/win32/
+Has a portable version (no admin rights to use)
+
+Dataset https://www.superdatascience.com/pages/training
+Years of Experience and Salary (30 rows)
+
+Simple Linear Regression from Gretl;
+
+Model 1: OLS ordinary least squares, using observations 1-30
+Dependent variable: Salary
+
+                    coefficient   std. error   t-ratio    p-value 
+  ----------------------------------------------------------------
+Independent variables;  
+  const               25792.2       2273.05      11.35    5.51e-012 ***
+  YearsExperience     9449.96       378.755      24.95    1.14e-020 ***
+Interpretation of above; 
+At zero years of experience you'd make 25792.2 (the coefficient) aka where the line would hit zero.
+For each year of experience you'd make an additional 9449.96 in the Model's world.
+e-020 ; means 10 to the power of - 20 AKA a really small number which means there is a dependency
+
+Mean dependent var   76003.00   S.D. dependent var   27414.43
+Sum squared resid    9.38e+08   S.E. of regression   5788.315
+R-squared            0.956957   Adjusted R-squared   0.955419
+F(1, 28)             622.5072   P-value(F)           1.14e-20
+Log-likelihood      −301.4412   Akaike criterion     606.8823
+Schwarz criterion    609.6847   Hannan-Quinn         607.7788
+Interpretation of above;
+R-squared and Adjusted R-squared are the things we are interested in here. 
+
+Lecture 52 - 61
+Noted caveats - assumptions with Linear Regressions
+1. Linearity
+2. Homoscedasticity
+3. Multivariate normality
+4. Independence of errors
+5. Lack of multicollinearity
+
+We will be building a Geo-Demographic Segmentation Model later on. 
+
+See 50 start ups project for a modeling project. 
