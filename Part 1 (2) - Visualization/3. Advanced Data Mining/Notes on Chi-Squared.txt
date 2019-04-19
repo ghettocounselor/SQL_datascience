@@ -16,3 +16,10 @@ items in the test in both of your groups.
 5. Never exclude any (even 1) of the outcomes; although you can excluse entire categories, ex; we 
 could in our data test France vs Germany and leave out Spain. This was not well described. 
 6. Minimum of 5 observations in each cell
+
+https://www.udemy.com/datascience/learn/lecture/3504242#questions/6853872
+There isn't an out-of-the-box chi-squared test in Tableau. However, you can build one like explained in this thread from Tableau forum:
+https://community.tableau.com/thread/117619
+If you are interested in perform this operation in Python or R, please refer to the following links:
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chisquare.html
+https://www.r-bloggers.com/chi-squared-test/
