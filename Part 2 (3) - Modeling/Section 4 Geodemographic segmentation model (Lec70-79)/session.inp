@@ -1,0 +1,33 @@
+# Log started 2019-04-20 05:48
+# Record of session commands.  Please note that this will
+# likely require editing if it is to be run as a script.
+open \
+  "F:\Part 2 (3) - Modeling\Section 4 Geodemographic segmentation model (Lec70-79)\P12-Churn-Modelling.gdt"
+WealthAccumulation = Balance / Age
+# model 1
+logit Exited 0 CreditScore Age NumOfProducts IsActiveMember Female \
+  Germany Tenure Log_Balance WealthAccumulation --p-values
+vif
+# model 2
+logit Exited 0 CreditScore Age NumOfProducts IsActiveMember Female \
+  Germany Tenure WealthAccumulation --p-values
+vif
+Log_WA = log10(Balance/Age + 1)
+# model 3
+logit Exited 0 CreditScore Age NumOfProducts IsActiveMember Female \
+  Germany Tenure Log_Balance Log_WA --p-values
+vif
+# model 4
+logit Exited 0 CreditScore Age NumOfProducts IsActiveMember Female \
+  Germany Tenure Log_Balance --p-values
+# model 5
+logit Exited 0 CreditScore Age NumOfProducts IsActiveMember Female \
+  Germany Tenure Log_WA --p-values
+# model 6
+logit Exited 0 CreditScore Age NumOfProducts IsActiveMember Female \
+  Germany Tenure Balance --p-values
+# model 7
+logit Exited 0 CreditScore Age NumOfProducts IsActiveMember Female \
+  Germany Tenure Log_Balance --p-values
+corr Log_WA WealthAccumulation Log_Balance Age --uniform
+# store "F:\Part 2 (3) - Modeling\Section 4 Geodemographic segmentation model (Lec70-79)\P12-Churn-Modelling.gdt" --gzipped

@@ -103,6 +103,10 @@ So, for this step Model 4 is our Model.
 
 Lecture 75 transforming independent variables https://www.udemy.com/datascience/learn/lecture/3496672
 Sometimes it can help to transform variables and get a sense of them better from the transfermation
+Basically what we have here is an effect (of the variable) but a misrepresentation due to the scaling
+of the variable; meaning the way it progressed from one extreme to the other didn't represent the
+effect well. So we adjust it by taking the log of the variable. So, here we are lookig to improve 
+the visualization of the variable's effect. 
 Examples;
 Square Root
 Taking something to the Second
@@ -118,43 +122,282 @@ Model 7
 Log_Balance       0.0690263     0.0139592       4.945   7.62e-07  ***
 Adjusted R-squared   0.151006
 
+Lecture 76 Creating Derived Variables https://www.udemy.com/datascience/learn/lecture/3496674
+Derived variables are designed to create a 'new' representation with the variable's change.
+Balance is a good example; an old person with a low balance and a young person with a low balance
+can be seen as two different things. 
 
+We'll create a new variable WealthAccumulation = Balance / Age
+This will more correctly demonstrate the impact of balance in our model.
+So, include in our model instead of balance. 
+Model => Limited dependent variable => logit => Binary
 
+Model 1: Logit, using observations 1-10000
+Dependent variable: Exited
+Standard errors based on Hessian
 
+                      coefficient   std. error      z      p-value 
+  -----------------------------------------------------------------
+  const               −3.82758      0.248202     −15.42   1.18e-053 ***
+  CreditScore         −0.000675560  0.000280329   −2.410  0.0160    **
+  Age                  0.0706681    0.00309455    22.84   2.00e-115 ***
+  NumOfProducts       −0.0955301    0.0475596     −2.009  0.0446    **
+  IsActiveMember      −1.07339      0.0576722    −18.61   2.57e-077 ***
+  Female               0.525712     0.0544733      9.651  4.88e-022 ***
+  Germany              0.746337     0.0651330     11.46   2.13e-030 ***
+  Tenure              −0.0159252    0.00934677    −1.704  0.0884    *
+  Log_Balance          0.0950938    0.0266187      3.572  0.0004    ***
+  WealthAccumulati~   −4.33552e-05  3.77862e-05   −1.147  0.2512   
 
+Mean dependent var   0.203700   S.D. dependent var   0.402769
+McFadden R-squared   0.152918   Adjusted R-squared   0.150940
+Log-likelihood      −4281.908   Akaike criterion     8583.815
+Schwarz criterion    8655.919   Hannan-Quinn         8608.222
 
+Number of cases 'correctly predicted' = 8123 (81.2%)
+f(beta'x) at mean of independent vars = 0.135
+Likelihood ratio test: Chi-square(9) = 1545.97 [0.0000]
 
+           Predicted
+               0      1
+  Actual 0  7684    279
+         1  1598    439
 
+Excluding the constant, p-value was highest for variable 21 (WealthAccumulation)
 
+Turns out it's not helpful; P-value is > our 0.05 at 0.2515
+and R-squared as gone down. 
 
+Lecture 77 Multicollinearity using VIF
+https://en.wikipedia.org/wiki/Multicollinearity
+Multicollinearity refers to a situation where your independent variables are correlated with
+one another. Wikipedia - In statistics, multicollinearity (also collinearity) is a phenomenon in 
+which one predictor variable in a multiple regression model can be linearly predicted from the 
+others with a substantial degree of accuracy.
 
+To check for Multicollinearity we can use Variance Inflation Factors
+FROM YOUR MODEL !! => Analysis => Collinearity
 
+Variance Inflation Factors
+Minimum possible value = 1.0
+Values > 10.0 may indicate a collinearity problem
 
+       CreditScore    1.001
+               Age    1.450
+     NumOfProducts    1.152
+    IsActiveMember    1.011
+            Female    1.003
+           Germany    1.271
+            Tenure    1.001
+       Log_Balance    5.860
+WealthAccumulation    5.722
 
+VIF(j) = 1/(1 - R(j)^2), where R(j) is the multiple correlation coefficient
+between variable j and the other independent variables
 
+Belsley-Kuh-Welsch collinearity diagnostics:
 
+                         --- variance proportions ---
+    lambda      cond     const CreditSc~       Age NumOfPro~ IsActive~    Female   Germany    Tenure Log_Bala~ WealthAc~
+     7.431     1.000     0.000     0.000     0.001     0.002     0.005     0.005     0.004     0.004     0.001     0.001
+     0.794     3.059     0.000     0.000     0.002     0.006     0.083     0.035     0.284     0.005     0.008     0.014
+     0.572     3.604     0.000     0.000     0.000     0.003     0.727     0.132     0.037     0.012     0.000     0.000
+     0.430     4.155     0.000     0.001     0.001     0.003     0.043     0.704     0.166     0.056     0.002     0.004
+     0.365     4.510     0.000     0.000     0.002     0.030     0.030     0.068     0.445     0.037     0.025     0.056
+     0.215     5.878     0.002     0.004     0.008     0.098     0.037     0.037     0.003     0.825     0.000     0.000
+     0.109     8.238     0.002     0.007     0.117     0.531     0.051     0.001     0.008     0.024     0.020     0.067
+     0.051    12.114     0.023     0.119     0.057     0.267     0.006     0.011     0.040     0.020     0.371     0.151
+     0.024    17.774     0.001     0.223     0.572     0.000     0.014     0.001     0.012     0.000     0.538     0.603
+     0.008    29.767     0.971     0.646     0.241     0.060     0.005     0.007     0.000     0.018     0.035     0.104
 
+  lambda = eigenvalues of X'X, largest to smallest
+  cond   = condition index
+  note: variance proportions columns sum to 1.0
 
+Interpretation; 
+note: Values > 10.0 may indicate a collinearity problem
+our values are not over 10 but they are much higher than other values we have. 
+       Log_Balance    5.860
+WealthAccumulation    5.722
 
+Test; we'll rerun the model and remove Log_Balance 
+Model 2: Logit, using observations 1-10000
+Dependent variable: Exited
+Standard errors based on Hessian
 
+                      coefficient   std. error      z      p-value 
+  -----------------------------------------------------------------
+  const               −3.93393      0.246385     −15.97   2.18e-057 ***
+  CreditScore         −0.000671869  0.000280046   −2.399  0.0164    **
+  Age                  0.0758300    0.00274955    27.58   1.98e-167 ***
+  NumOfProducts       −0.121038     0.0471074     −2.569  0.0102    **
+  IsActiveMember      −1.07881      0.0576645    −18.71   4.23e-078 ***
+  Female               0.526299     0.0544270      9.670  4.05e-022 ***
+  Germany              0.808180     0.0629285     12.84   9.44e-038 ***
+  Tenure              −0.0158045    0.00934123    −1.692  0.0907    *
+  WealthAccumulati~    7.07501e-05  1.94600e-05    3.636  0.0003    ***
 
+Mean dependent var   0.203700   S.D. dependent var   0.402769
+McFadden R-squared   0.151650   Adjusted R-squared   0.149869
+Log-likelihood      −4288.318   Akaike criterion     8594.635
+Schwarz criterion    8659.528   Hannan-Quinn         8616.601
 
+Number of cases 'correctly predicted' = 8121 (81.2%)
+f(beta'x) at mean of independent vars = 0.135
+Likelihood ratio test: Chi-square(8) = 1533.15 [0.0000]
 
+           Predicted
+               0      1
+  Actual 0  7685    278
+         1  1601    436
 
+Interpretation; 
+Now Wealth accumulation is very significant! 
+VIF with new model
+Variance Inflation Factors
+Minimum possible value = 1.0
+Values > 10.0 may indicate a collinearity problem
 
+       CreditScore    1.001
+               Age    1.115
+     NumOfProducts    1.118
+    IsActiveMember    1.011
+            Female    1.003
+           Germany    1.187
+            Tenure    1.001
+WealthAccumulation    1.387
 
+Let's make a new variable Log_WA = log10(Balance/Age + 1)
+And lets include this in our model, with Log_Balance and remove WealthAccumulation
+in order to further explore any collinearity.
+Model 3: Logit, using observations 1-10000
+Dependent variable: Exited
+Standard errors based on Hessian
 
+                   coefficient    std. error       z       p-value 
+  -----------------------------------------------------------------
+  const            −3.57346       0.267434      −13.36    1.01e-040 ***
+  CreditScore      −0.000669347   0.000280551    −2.386   0.0170    **
+  Age               0.0647075     0.00389083     16.63    4.17e-062 ***
+  NumOfProducts    −0.0983277     0.0476530      −2.063   0.0391    **
+  IsActiveMember   −1.06875       0.0577188     −18.52    1.52e-076 ***
+  Female            0.526344      0.0545126       9.655   4.66e-022 ***
+  Germany           0.751604      0.0654004      11.49    1.44e-030 ***
+  Tenure           −0.0161727     0.00935429     −1.729   0.0838    *
+  Log_Balance       0.869891      0.296738        2.932   0.0034    ***
+  Log_WA           −1.17620       0.435274       −2.702   0.0069    ***
 
+Mean dependent var   0.203700   S.D. dependent var   0.402769
+McFadden R-squared   0.153511   Adjusted R-squared   0.151533
+Log-likelihood      −4278.908   Akaike criterion     8577.816
+Schwarz criterion    8649.920   Hannan-Quinn         8602.223
 
+Number of cases 'correctly predicted' = 8125 (81.2%)
+f(beta'x) at mean of independent vars = 0.135
+Likelihood ratio test: Chi-square(9) = 1551.97 [0.0000]
 
+           Predicted
+               0      1
+  Actual 0  7685    278
+         1  1597    440
 
+Interpretation;
+Both of these are now significant!
+  Log_Balance       0.869891      0.296738        2.932   0.0034    ***
+  Log_WA           −1.17620       0.435274       −2.702   0.0069    ***
+And we can see they have opposite signs for coefficient, so one increasing the likelihood
+of exit and one decreasing the likelihood. 
+VIF's :D
+   Log_Balance  705.941
+        Log_WA  704.740
+Wow! 
+So we need to exclude one of them. Comparing the various models R-squared values we see that 
+this model has the best R-squared. NOTE: the model with both Log_Balance and Log_WA had a better
+R-squared ;) but VIF was a mess. 
+Model 7 (Kirills' model 20): Logit, using observations 1-10000
+Dependent variable: Exited
+Standard errors based on Hessian
 
+                   coefficient    std. error       z       p-value 
+  -----------------------------------------------------------------
+  const            −3.91258       0.237164      −16.50    3.84e-061 ***
+  CreditScore      −0.000674866   0.000280272    −2.408   0.0160    **
+  Age               0.0726550     0.00257451     28.22    3.24e-175 ***
+  NumOfProducts    −0.0950198     0.0475374      −1.999   0.0456    **
+  IsActiveMember   −1.07578       0.0576458     −18.66    1.01e-077 ***
+  Female            0.526721      0.0544591       9.672   3.97e-022 ***
+  Germany           0.747595      0.0650515      11.49    1.44e-030 ***
+  Tenure           −0.0158791     0.00934627     −1.699   0.0893    *
+  Log_Balance       0.0690263     0.0139592       4.945   7.62e-07  ***
 
+Mean dependent var   0.203700   S.D. dependent var   0.402769
+McFadden R-squared   0.152787   Adjusted R-squared   0.151006
+Log-likelihood      −4282.570   Akaike criterion     8583.141
+Schwarz criterion    8648.034   Hannan-Quinn         8605.107
 
+Number of cases 'correctly predicted' = 8127 (81.3%)
+f(beta'x) at mean of independent vars = 0.135
+Likelihood ratio test: Chi-square(8) = 1544.64 [0.0000]
 
+           Predicted
+               0      1
+  Actual 0  7687    276
+         1  1597    440
 
+Lecture 78 Correlation Matrix and Multicollinearity Intuition
+https://www.udemy.com/datascience/learn/lecture/3496682
+Gretl => View => Correlation Matrix
+To start we'll check Log_WA, WealthAccumulation, Log_Balance and Age
+(limitting the list only to make easier to read)
+Correlation Coefficients, using the observations 1 - 10000
+5% critical value (two-tailed) = 0.0196 for n = 10000
 
+          Log_WA WealthAccumula~     Log_Balance             Age
+          1.0000          0.8889          0.9984         -0.0075 Log_WA
+                          1.0000          0.8651         -0.2463 WealthAccumula~
+                                          1.0000          0.0345 Log_Balance
+                                                          1.0000 Age
+Correlation is between -1 and 1 and Zero is no correlation. 
+All variables have a 1 = 1 correlation with themselves. You can see this in the matrix above. 
+The negative numbers represent that the items are simply correlated in the opposite direction, 
+meaning they are correlated but they move in opposite directions to one another. 
+The more correlated the higher the number. 
+Interpretation;
+Take Log_Balance and Log_WA - correlation is 0.9984 so they are pretty much fully correlated
+and that means they are pretty much the same. 
+Now Log_Balance and WealthAccumulation 
+Remember before we saw issues with VIF
+       Log_Balance    5.860
+WealthAccumulation    5.722
+That is shown here as well with a correlation of 0.8651 :) 
 
+RULE OF THUMB - 
+above 0.9 is very high correlation and can be removed. 
+above 0.7 is high correlation should probably also be removed.
+between 0.5 and 0.7 is moderate correlation and worth looking at. 
+above 0.3 can probably be left in the model
+< 0.3 is low correlation
+
+Intuition regarding correlation - basically you are double counting/considering the things. 
+Remember the model is running alot of math trying to take each variable in the model
+one at a time and holding all others constant then adjusting that one variable to a 'best fit' 
+of sorts; in order to determine each variables impact/effect on the dependent variable.
+So, if what you have are two variables that are appreciably the same then when the model is
+dealing with holding all others constant and adjusting the one variable to test its effect
+that 'other' variable is in the constants stiring the pot as it were just like the tested 
+variable were there itself. Basically what it means is that the model cannot assess the individual 
+effect of the two correlated variables on your dependent variable separately and so it 
+damages the model overall. 
+
+Lecture 79 Conclusion https://www.udemy.com/datascience/learn/lecture/3496696
+Section recap
+1. performed a Geodemographic Segmentation
+2. built a real segmentaiton model
+3. transfermation of independent variable due to it not properly representing its impact
+4. create derived variables from combining two variables
+5. intuition between correlation i.e. Multicollinearity
+6. how to check for Multicollinearity
+7. how to read the correlation matrix
 
 
 {\rtf1}

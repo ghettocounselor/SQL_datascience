@@ -1,0 +1,33 @@
+Variance Inflation Factors
+Minimum possible value = 1.0
+Values > 10.0 may indicate a collinearity problem
+
+       CreditScore    1.001
+               Age    1.115
+     NumOfProducts    1.118
+    IsActiveMember    1.011
+            Female    1.003
+           Germany    1.187
+            Tenure    1.001
+WealthAccumulation    1.387
+
+VIF(j) = 1/(1 - R(j)^2), where R(j) is the multiple correlation coefficient
+between variable j and the other independent variables
+
+Belsley-Kuh-Welsch collinearity diagnostics:
+
+                         --- variance proportions ---
+    lambda      cond     const CreditSc~       Age NumOfPro~ IsActive~    Female   Germany    Tenure WealthAc~
+     6.629     1.000     0.000     0.000     0.001     0.002     0.006     0.006     0.005     0.005     0.004
+     0.718     3.039     0.000     0.000     0.002     0.003     0.103     0.022     0.478     0.002     0.057
+     0.572     3.404     0.000     0.000     0.000     0.003     0.707     0.132     0.061     0.012     0.000
+     0.426     3.943     0.001     0.001     0.002     0.007     0.056     0.781     0.062     0.071     0.004
+     0.293     4.754     0.000     0.000     0.004     0.032     0.019     0.003     0.362     0.011     0.606
+     0.215     5.556     0.002     0.004     0.009     0.094     0.035     0.037     0.007     0.837     0.002
+     0.105     7.961     0.004     0.013     0.147     0.682     0.045     0.002     0.009     0.037     0.042
+     0.034    13.958     0.023     0.294     0.637     0.099     0.025     0.009     0.012     0.007     0.192
+     0.009    27.762     0.970     0.688     0.198     0.078     0.004     0.008     0.004     0.018     0.094
+
+  lambda = eigenvalues of X'X, largest to smallest
+  cond   = condition index
+  note: variance proportions columns sum to 1.0
