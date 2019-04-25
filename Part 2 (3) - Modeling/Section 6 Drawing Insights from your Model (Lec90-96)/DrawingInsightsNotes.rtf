@@ -1,0 +1,224 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\fnil\fcharset0 Calibri;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue233;\red191\green191\blue191;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c93333;\csgray\c79525;}
+\margl1440\margr1440\vieww18760\viewh10160\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+Lecture 91 Insights from CAP curve\
+Basically Kirill goes over reading the CAP curve, not from a mathematical sense but just from literally reading it; nothing surprising here.\
+\
+Lecture 92 Coefficients of a Logistic Regressions (Advance Lecture)\
+{\field{\*\fldinst{HYPERLINK "https://www.udemy.com/datascience/learn/lecture/3555104"}}{\fldrslt https://www.udemy.com/datascience/learn/lecture/3555104}}\
+How to interpret the Coefficients. Things we\'92ll go through in this section;\
+1. Odds Ratio - linking odds and probabilities, key take away they are not the same!\
+2. How to plug Odds into our Logistic Regression to see how the Change in Coefficient translates into a change in the Odds (not probability)\
+3. Practical Applications of the Logistic Regression\
+\
+Lecture 93 Odds ratio (Advanced topic) {\field{\*\fldinst{HYPERLINK "https://www.udemy.com/datascience/learn/lecture/3504258"}}{\fldrslt https://www.udemy.com/datascience/learn/lecture/3504258}}\
+cool website URL {\field{\*\fldinst{HYPERLINK "https://rechneronline.de/function-graphs/"}}{\fldrslt 
+\f1 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 \outl0\strokewidth0 \strokec2 https://rechneronline.de/function-graphs/}}
+\f1 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 \outl0\strokewidth0 \strokec2 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \ulnone \outl0\strokewidth0 Graphed the formula for winning odds vs probability to give visual representation\
+\
+Lecture 94 Odds Ratio vs Coefficients in a Logistic Regression (Advance Lecture) \
+{\field{\*\fldinst{HYPERLINK "https://www.udemy.com/datascience/learn/lecture/3504268"}}{\fldrslt https://www.udemy.com/datascience/learn/lecture/3504268}} \
+Win:Lose Odds = P / 1 - P\
+P is probability \
+When we say \'91odds\'92 we always mean Win to Lose so we\'92ll just say.\
+Odds = P / 1 - P\
+\
+conclusion of some review of math in lecture. \
+Increasing an independent variable by 1 unit will increase the odds by a multiplicative factor of that variable to the power of 1\
+See lecture and see image Coefficients_Increase_by1Unit.png\
+\
+e to the power calculator {\field{\*\fldinst{HYPERLINK "http://onlinecalculators.brainmeasures.com/Numbers/ePowerxCalculator.aspx"}}{\fldrslt 
+\f1 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 \outl0\strokewidth0 \strokec2 http://onlinecalculators.brainmeasures.com/Numbers/ePowerxCalculator.aspx}}
+\f1 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 \outl0\strokewidth0 \strokec2 \
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \ulnone \outl0\strokewidth0 is pretty slick\
+Where the \'91power\'92 is the coefficient we get from our model. \
+in the case where Age in our Churn had a coefficient of 0.0726550 \
+we can use the calculator to see that e to the power of 0.0726550 is 1.075\
+meaning that the Odds of Age having an impact (churn or not) increase to Odds x 1.075 for each 1 year in age\
+See formula image and lecture again to understand the math; truth be told this is just so we have some sense, again, of the relationship of magnitude\
+with regard to how things change in the formula as the variables change in our examples. \
+e is rapiers constant see wikipedia \
+\
+\
+Lecture 95 Deriving Insights from your Coefficients\
+Get Odds Ratio added to Gretl\
+Package; File => Function Packages => on Server => oddsratios Riccardo Jack\'85. => right click install\
+see image ModelTOoddsRatios.png for example and instructions on getting odds\
+\
+Next XLS\
+Paste two groups of data into XLS and use text to col to clean up and get down to just the basics. \
+Add conditional formatting \'91heat map\'92 to the odds\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2160
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx6480
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+
+\f2 \cf0 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 coefficient\cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 p-value\cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 Odds-ratio\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2160
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx6480
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 const\cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 \uc0\u8722 3.91258\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 3.84E-61\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2160
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx6480
+\clvertalc \clcbpat1 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 CreditScore\cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 \uc0\u8722 0.000674866\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 0.016\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 0.9993\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2160
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx6480
+\clvertalc \clcbpat1 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 Age\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 0.072655\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 3.24E-175\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 1.0754\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2160
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx6480
+\clvertalc \clcbpat1 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 NumOfProducts\cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 \uc0\u8722 0.0950198\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 0.0456\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 0.9094\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2160
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx6480
+\clvertalc \clcbpat1 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 IsActiveMember\cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 \uc0\u8722 1.07578\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 1.01E-77\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 0.341\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2160
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx6480
+\clvertalc \clcbpat1 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 Female\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 0.526721\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 3.97E-22\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 1.6934\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2160
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx6480
+\clvertalc \clcbpat1 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 Germany\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 0.747595\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 1.44E-30\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 2.1119\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2160
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx6480
+\clvertalc \clcbpat1 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 Tenure\cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 \uc0\u8722 0.0158791\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 0.0893\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 0.9842\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2160
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx6480
+\clvertalc \clcbpat1 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf0 Log_Balance\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 0.0690263\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 7.62E-07\cell 
+\pard\intbl\itap1\pardeftab720\qr\partightenfactor0
+\cf0 1.0715\cell \lastrow\row
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 \
+Basic rule of thumb for reading Odds-Ratios\
+> 0.8 and < 1.2 not so useful\
+Basic idea is that around \'911\'92 this has little impact in the formula; multiply anything by 1 doesn\'92t change things. \
+However, the farther you get from \'911\'92, the more impact. \
+Example;\
+-- Change someone from an inactive member to active and you decrease the chance of leaving by 66% (multiply by 0.341), that\'92s notable. \
+\'97 work on making women more comfortable\
+\'97 folks in germany are more likely to leave\
+\
+\
+\
+\
+\
+\
+\
+}
